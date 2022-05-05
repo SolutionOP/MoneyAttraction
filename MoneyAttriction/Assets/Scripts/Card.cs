@@ -6,11 +6,20 @@ using UnityEngine.EventSystems;
 public class Card : MonoBehaviour, IPointerDownHandler
 {
     [SerializeField]
-    private GameObject frontCard;
+    private GameObject[] frontCards;
+
+    private GameObject currentFrontCard;
 
     public void OnPointerDown(PointerEventData eventData)
     {
+        SetRandomFrontCard();
         StartFlip();
+    }
+
+    private void SetRandomFrontCard()
+    {
+        int tmpIndex = Random.Range(0,frontCards.Length);
+        currentFrontCard = frontCards[tmpIndex];
     }
 
     private void StartFlip()
@@ -20,7 +29,7 @@ public class Card : MonoBehaviour, IPointerDownHandler
 
     private IEnumerator FlipCard()
     {
-        frontCard.transform.Rotate(0f, -90f, 0f);
+        currentFrontCard.transform.Rotate(0f, -90f, 0f);
         for (int i = 0; i < 180; i++)
         {
             yield return new WaitForSecondsRealtime(0.001f);
@@ -30,8 +39,8 @@ public class Card : MonoBehaviour, IPointerDownHandler
             }
             else
             {
-                frontCard.SetActive(true);
-                frontCard.transform.Rotate(0f, 1f, 0f);
+                currentFrontCard.SetActive(true);
+                currentFrontCard.transform.Rotate(0f, 1f, 0f);
             }
         }
         yield return new WaitForSecondsRealtime(0.5f);
@@ -43,7 +52,7 @@ public class Card : MonoBehaviour, IPointerDownHandler
         for (int i = 0; i < 40; i++)
         {
             yield return new WaitForSecondsRealtime(0.01f);
-            frontCard.GetComponent<RectTransform>().localScale += new Vector3(0.05f, 0.05f, 0.05f);
+            currentFrontCard.GetComponent<RectTransform>().localScale += new Vector3(0.05f, 0.05f, 0.05f);
         }
     }
 }
