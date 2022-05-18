@@ -43,8 +43,7 @@ public class MainCard : MonoBehaviour, IPointerDownHandler
     /// </summary>
     private void SetCurrentTextImage()
     {
-        int tmpIndex = Random.Range(0, fullImages.Length);
-        currentTextCard = fullImages[tmpIndex];
+        currentTextCard = currentFrontCard.transform.parent.GetChild(1).gameObject.GetComponent<Image>();
     }
 
 
