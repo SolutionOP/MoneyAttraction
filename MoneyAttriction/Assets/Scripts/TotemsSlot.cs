@@ -15,12 +15,26 @@ public class TotemsSlot : MonoBehaviour, IDropHandler
 
     public void OnDrop(PointerEventData eventData)
     {
-        if (eventData.pointerDrag != null)
-        {
-            SetNewTotemToSpawnSLot(eventData);  
-        }
+        ChooseWrightSlot(eventData);
     }
 
+    /// <summary>
+    /// Choosing whirht slot to set totem
+    /// </summary>
+    /// <param name="eventData">Totem itself</param>
+    private void ChooseWrightSlot(PointerEventData eventData)
+    {
+        for (int i = 0; i < 6; i++)
+        {
+            if (eventData.pointerDrag.gameObject.tag == transform.parent.transform.GetChild(i).gameObject.tag)
+            {
+                if (eventData.pointerDrag != null)
+                {
+                    transform.parent.transform.GetChild(i).gameObject.GetComponent<TotemsSlot>().SetNewTotemToSpawnSLot(eventData);
+                }
+            }
+        }
+    }
 
     /// <summary>
     /// Check for empty slot
@@ -58,10 +72,11 @@ public class TotemsSlot : MonoBehaviour, IDropHandler
     /// Set spawned totem to totem's slot
     /// </summary>
     /// <param name="eventData"></param>
-    private void SetNewTotemToSpawnSLot(PointerEventData eventData)
+    public void SetNewTotemToSpawnSLot(PointerEventData eventData)
     {
         CheckForEmptySlot();
         GameObject spawnedTotem = Instantiate(eventData.pointerDrag.gameObject, Vector3.zero, Quaternion.identity);
+        spawnedTotem.transform.localScale = new Vector3(1.4f, 1.4f, 1.4f);
         spawnedTotem.GetComponent<Totems>().ChangeSpawnConditions(false);
         spawnedTotem.GetComponent<Totems>().ChangeCanvasGroupProperties(spawnedTotem.GetComponent<CanvasGroup>(), true, 1f);
         SetTotemsParent(spawnedTotem);

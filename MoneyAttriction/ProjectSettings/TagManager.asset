@@ -6,6 +6,12 @@ TagManager:
   tags:
   - MainCard
   - Totem
+  - RedTotem
+  - GreenTotem
+  - PurpleTotem
+  - BlueTotem
+  - RoseTotem
+  - BrightBlueTotem
   layers:
   - Default
   - TransparentFX
