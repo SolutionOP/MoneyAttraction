@@ -106,6 +106,10 @@ public class MainCard : MonoBehaviour, IPointerDownHandler
             yield return new WaitForSeconds(0.05f);
             color.a += 0.1f;
             currentTextCard.color = color;
+            if (i == 2)
+            { 
+                currentTextCard.transform.GetChild(0).gameObject.SetActive(true);
+            }
         }
         SetCardsInitialState(backCard, frontCard);
     }

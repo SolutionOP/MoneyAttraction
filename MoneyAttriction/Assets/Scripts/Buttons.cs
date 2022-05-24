@@ -31,5 +31,6 @@ public class Buttons : MonoBehaviour
         transform.parent.gameObject.GetComponent<Image>().color = color;
         transform.parent.gameObject.SetActive(false);
         transform.parent.parent.transform.GetChild(0).gameObject.SetActive(false);
+        this.gameObject.SetActive(false);
     }
 }
