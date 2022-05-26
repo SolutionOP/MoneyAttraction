@@ -12,6 +12,14 @@ TagManager:
   - BlueTotem
   - RoseTotem
   - BrightBlueTotem
+  - Elephant
+  - Cat
+  - Frog
+  - Hedgehog
+  - Whale
+  - active
+  - passive
+  - counter
   layers:
   - Default
   - TransparentFX

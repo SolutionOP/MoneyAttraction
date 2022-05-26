@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class TotemsSlot : MonoBehaviour, IDropHandler
 {
@@ -9,8 +10,13 @@ public class TotemsSlot : MonoBehaviour, IDropHandler
     [Tooltip("Main canvas")]
     [SerializeField]
     private Canvas canvas;
+    [SerializeField]
+    private Text totemsCounterText;
+    [SerializeField]
+    private GameObject counter;
 
     private bool isSlotEmpty = true;
+    private int totemsCounter = 1;
 
 
     public void OnDrop(PointerEventData eventData)
@@ -52,9 +58,16 @@ public class TotemsSlot : MonoBehaviour, IDropHandler
     /// </summary>
     private void EmptyTotemsSlot()
     {
+
         foreach (Transform child in gameObject.transform)
         {
-            Destroy(child.gameObject);
+            if (child.gameObject.tag != "counter")
+            {
+                totemsCounter += 1;
+                counter.SetActive(true);
+                totemsCounterText.text = totemsCounter.ToString();
+                Destroy(child.gameObject);
+            }
         }
     }
 
@@ -78,8 +91,14 @@ public class TotemsSlot : MonoBehaviour, IDropHandler
         GameObject spawnedTotem = Instantiate(eventData.pointerDrag.gameObject, Vector3.zero, Quaternion.identity);
         spawnedTotem.transform.localScale = new Vector3(1.4f, 1.4f, 1.4f);
         spawnedTotem.GetComponent<Totems>().ChangeSpawnConditions(false);
-        spawnedTotem.GetComponent<Totems>().ChangeCanvasGroupProperties(spawnedTotem.GetComponent<CanvasGroup>(), true, 1f);
+        spawnedTotem.GetComponent<Totems>().ChangeCanvasGroupProperties(spawnedTotem.GetComponent<CanvasGroup>(), false, 1f);
         SetTotemsParent(spawnedTotem);
+        spawnedTotem.transform.SetSiblingIndex(0);
+
+
+
+
+
         isSlotEmpty = false;
     }
 }
