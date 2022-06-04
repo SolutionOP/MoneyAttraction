@@ -5,6 +5,8 @@ using UnityEngine.EventSystems;
 
 public class PlayerIcons : MonoBehaviour, IDragHandler
 {
+    [Header("Prefabs")]
+    [Tooltip("Main canvas object")]
     [SerializeField]
     private Canvas canvas;
 
@@ -12,11 +14,20 @@ public class PlayerIcons : MonoBehaviour, IDragHandler
 
     private void Start()
     {
+        rectTransform = GetComponent<RectTransform>();
+      
+    }
+
+
+    /// <summary>
+    /// Creating new player icon
+    /// </summary>
+    private void InstantiateIcon()
+    {
         GameObject newIcon =  Instantiate(this.gameObject);
         newIcon.GetComponent<PlayerIcons>().enabled = false;
         newIcon.transform.SetParent(this.transform.parent, false);
         newIcon.transform.SetSiblingIndex(0);
-        rectTransform = GetComponent<RectTransform>();
     }
 
     public void OnDrag(PointerEventData eventData)

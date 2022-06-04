@@ -9,11 +9,9 @@ public class MainCard : MonoBehaviour, IPointerDownHandler
     [Tooltip("Front cards array")]
     [SerializeField]
     private GameObject[] frontCards;
-
+    [Tooltip("Main card game object")]
     [SerializeField]
     private GameObject mainCard;
-
-    [Header("Values")]
     [Tooltip("Fullscreen front image array")]
     [SerializeField]
     private Image[] fullImages;

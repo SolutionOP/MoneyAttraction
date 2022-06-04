@@ -11,9 +11,10 @@ public class Totems : MonoBehaviour, IDragHandler, IEndDragHandler, IPointerDown
     [Tooltip("Main canvas")]
     [SerializeField]
     private Canvas canvas;
+    [Tooltip("Bool for spawn new totem")]
+    public bool shouldSpawn = true;
     private RectTransform m_RectTransform;
     private CanvasGroup m_CanvasGroup;
-    public bool shouldSpawn = true;
 
     private void Awake()
     {
@@ -77,6 +78,10 @@ public class Totems : MonoBehaviour, IDragHandler, IEndDragHandler, IPointerDown
         spawnedTotem.transform.SetSiblingIndex(2);
     }
 
+    /// <summary>
+    /// Changing spawned bool value
+    /// </summary>
+    /// <param name="value">Bool value to change</param>
     public void ChangeSpawnConditions(bool value)
     {
         shouldSpawn = value;

@@ -4,14 +4,24 @@ using UnityEngine;
 
 public class SceneController : MonoBehaviour
 {
-    [SerializeField] private GameObject[] playerPanels;
-    [SerializeField] private GameObject blurBackground;
+    [Header("Prefabs")]
+    [Tooltip("Player panels array")]
+    [SerializeField]
+    private GameObject[] playerPanels;
+    [Tooltip("Blur background image")]
+    [SerializeField]
+    private GameObject blurBackground;
+    [Tooltip("Animation serialize element")]
+    [SerializeField]
+    private Animation anim;
     private int playersCount = 0;
+    public int totemsCounter = 0;
+
 
     /// <summary>
     /// Changing Chek MArk Status
     /// </summary>
-    /// <param name="checkMark"></param>
+    /// <param name="checkMark">Green mark obj</param>
     public void ChangeMarkStatus(GameObject checkMark)
     {
         if (checkMark.activeInHierarchy)

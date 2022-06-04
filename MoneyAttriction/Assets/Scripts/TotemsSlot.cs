@@ -10,8 +10,10 @@ public class TotemsSlot : MonoBehaviour, IDropHandler
     [Tooltip("Main canvas")]
     [SerializeField]
     private Canvas canvas;
+    [Tooltip("Text for totem's counter")]
     [SerializeField]
     private Text totemsCounterText;
+    [Tooltip("Empty object with child slots")]
     [SerializeField]
     private GameObject counter;
 
@@ -74,7 +76,7 @@ public class TotemsSlot : MonoBehaviour, IDropHandler
     /// <summary>
     /// Set totem's new parent
     /// </summary>
-    /// <param name="spawnedTotem"></param>
+    /// <param name="spawnedTotem">Totem game object for spawn</param>
     private void SetTotemsParent(GameObject spawnedTotem)
     {
         spawnedTotem.transform.SetParent(transform, false);
@@ -84,7 +86,7 @@ public class TotemsSlot : MonoBehaviour, IDropHandler
     /// <summary>
     /// Set spawned totem to totem's slot
     /// </summary>
-    /// <param name="eventData"></param>
+    /// <param name="eventData">Out of event</param>
     public void SetNewTotemToSpawnSLot(PointerEventData eventData)
     {
         CheckForEmptySlot();
