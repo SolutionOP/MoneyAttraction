@@ -34,6 +34,10 @@ public class PlayerPanel : MonoBehaviour
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            SceneManager.LoadScene(1);
+        }
         if (CheckTotemsCount() && !isWinningScene)
         {
             LoadWinningImage();
@@ -49,10 +53,12 @@ public class PlayerPanel : MonoBehaviour
         {
             if (winSc[i].tag == iconTag)
             {
+                Debug.Log("win");
                 isWinningScene = true;
                 winSc[i].transform.GetChild(0).GetComponent<Image>().raycastTarget = true;
                 winSc[i].GetComponent<Animation>().Play(iconTag);
-                StartCoroutine(ReloadScene());
+                StartCoroutine(ReloadScene(winSc[i].gameObject));
+                
             }
         }
     }
@@ -61,10 +67,11 @@ public class PlayerPanel : MonoBehaviour
     /// Reloadin scene caroutine
     /// </summary>
     /// <returns></returns>
-    private IEnumerator ReloadScene()
+    private IEnumerator ReloadScene(GameObject winScene)
     {
         yield return new WaitForSecondsRealtime(5f);
-        SceneManager.LoadScene(0);
+        winScene.transform.GetChild(0).GetComponent<Image>().raycastTarget = false;
+        winScene.SetActive(false);
     }
 
 
@@ -127,10 +134,6 @@ public class PlayerPanel : MonoBehaviour
     public void MinusOneStar()
     {
         scoreValue -= 1;
-        if (scoreValue < 0)
-        { 
-            scoreValue = 0;
-        }
         starScore.text = scoreValue.ToString();
     }
 }

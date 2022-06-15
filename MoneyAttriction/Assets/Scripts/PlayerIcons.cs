@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class PlayerIcons : MonoBehaviour, IDragHandler
+public class PlayerIcons : MonoBehaviour, IDragHandler, IPointerDownHandler
 {
     [Header("Prefabs")]
     [Tooltip("Main canvas object")]
@@ -11,6 +11,7 @@ public class PlayerIcons : MonoBehaviour, IDragHandler
     private Canvas canvas;
 
     private RectTransform rectTransform;
+    private bool isSpawned = false;
 
     private void Start()
     {
@@ -34,5 +35,15 @@ public class PlayerIcons : MonoBehaviour, IDragHandler
     {
 
         rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
+        
+    }
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        if (!isSpawned)
+        {
+            isSpawned = true;
+            InstantiateIcon();
+        }
     }
 }
