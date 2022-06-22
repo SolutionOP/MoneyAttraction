@@ -24,7 +24,7 @@ public class KeyCodeEnter : MonoBehaviour
     }
 private void Awake()
     {
-        if (PlayerPrefs.HasKey("settings"))
+        if (PlayerPrefs.HasKey("settingsS"))
         {
             SettingsStruct loadSettings = JsonUtility.FromJson<SettingsStruct>(PlayerPrefs.GetString("settingsS"));
             bool isKeyEntered = loadSettings.keyBool;
